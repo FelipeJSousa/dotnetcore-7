@@ -8,5 +8,9 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
+        CreateMap<User, UserGetAllDto>().ReverseMap();
+        CreateMap<User, UserGetAllRankingDto>()
+            .ForMember(dest => dest.Ranking, opt => opt.MapFrom(src => (new Random()).Next(1, 10001)))
+            .ReverseMap();
     }   
 }
