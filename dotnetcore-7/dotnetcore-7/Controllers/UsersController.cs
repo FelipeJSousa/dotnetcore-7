@@ -56,5 +56,15 @@ namespace dotnetcore_7.Controllers
 
             return _ret?.Any() == true ? Ok(_ret) : NoContent();
         }
+
+        [HttpGet("Ranking")]
+        public IActionResult GetAllRanking()
+        {
+            var _ret = Users.Select(_Mapper.Map<UserGetAllRankingDto>).OrderBy(x => x.Ranking).ToArray();
+
+            _logger.LogInformation($"Returned {_ret.Count()} users.");
+
+            return _ret?.Any() == true ? Ok(_ret) : NoContent();
+        }
     }
 }
