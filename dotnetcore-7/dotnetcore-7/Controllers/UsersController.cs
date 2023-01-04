@@ -47,5 +47,14 @@ namespace dotnetcore_7.Controllers
             _Mapper = mapper;
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var _ret = Users.Select(_Mapper.Map<UserGetAllDto>).OrderBy(x => x.NickName).ToArray();
+
+            _logger.LogInformation($"Returned {_ret.Count()} users.");
+
+            return _ret?.Any() == true ? Ok(_ret) : NoContent();
+        }
     }
 }
